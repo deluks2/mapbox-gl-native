@@ -616,8 +616,6 @@ std::chrono::steady_clock::duration secondsAsDuration(float duration)
 {
     if ( ! self.isDormant)
     {
-        [self notifyMapChange:@(mbgl::MapChangeWillStartRenderingMap)];
-
         _mbglMap->resize(rect.size.width, rect.size.height, view.contentScaleFactor);
 
         CGFloat zoomFactor   = _mbglMap->getMaxZoom() - _mbglMap->getMinZoom() + 1;
@@ -631,8 +629,6 @@ std::chrono::steady_clock::duration secondsAsDuration(float duration)
         _mbglMap->setSourceTileCacheSize(cacheSize);
 
         _mbglMap->renderSync();
-
-        [self notifyMapChange:@(mbgl::MapChangeDidFinishRenderingMap)];
     }
 }
 
